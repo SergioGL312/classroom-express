@@ -63,8 +63,14 @@ profe.post('/crearTarea', async (req, res, next) => {
   return res.status(500).json({ code: 500, message: "Valores incompletos" });
 });
 
+profe.get('/tareasAlum', async (req, res, next) => {
+  const query = "Select u.nombre FROM entrega_de_tareas e, usuarios u WHERE e.id_estudiante = u.id;";
+  const rows = await db.query(query);
+  return res.status(200).json({ code: 200, message: rows });
+});
 
 function generarCodigo() {
+
   const codigo = randomstring.generate({
     length: 6,
     charset: 'alphanumeric'
