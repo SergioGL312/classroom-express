@@ -25,8 +25,19 @@ profe.post('/crearCurso', async (req, res, next) => {
 
     return res.status(500).json({ code: 500, message: "Ocurrio un error" });
   }
-  return res.status(500).json({ code: 500, message: "Incomplete values" });
+  return res.status(500).json({ code: 500, message: "Valores incompletos" });
 });
+
+profe.get('/curso=:id([0-9]{1,3})', async (req, res, next) => {
+  const id = req.params.id;
+  const tamanio = await db.query(`SELECT count(*) AS "size" FROM clases;`);
+  if (id >= 1 && id <= tamanio[0].size) {
+      const curso = await db.query(`SELECT * FROM clases WHERE id = '${id}';`);
+      return res.status(200).json({code: 200, message: curso});
+  }
+  return res.status(404).json({code: 404, message: "Curso no encontrado" });
+}); 
+
 
 const generarCodigo = () => {
   const codigo = randomstring.generate({
