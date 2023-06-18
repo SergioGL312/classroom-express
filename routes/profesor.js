@@ -39,6 +39,13 @@ profe.get('/curso=:id([0-9]{1,3})', async (req, res, next) => {
 }); 
 
 
+profe.get('/tareasAlum', async (req, res, next) => {
+  const query = "Select u.nombre FROM entrega_de_tareas e, usuarios u WHERE e.id_estudiante = u.id;";
+  const rows = await db.query(query);
+  return res.status(200).json({ code: 200, message: rows });
+});
+
+
 const generarCodigo = () => {
   const codigo = randomstring.generate({
     length: 6,
