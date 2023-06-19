@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/5ba0cb994d.js" crossorigin="anonymous"></script>
+    <script src="js/profe.js"></script>
+    <title>Profesor</title>
+</head>
+
+<body>
+    <header class="p-3 text-bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="profe.html" class="nav-link px-2 text-secondary" style="font-size: 30px;">Coderater</a></li>
+                    <!-- <li><a href="search.html" class="nav-link px-2 text-white" style="font-size: 15px; margin-left: 30px; padding-top: 22px;">Search Employees</a></li> -->
+                </ul>
+
+                <div class="text-end">
+                    <button type="button" class="btn btn-warning" id="new-class" style="margin-right: 10px;">Nueva
+                        clase</button>
+                    <button type="button" class="btn btn-danger" id="log-out" style="margin-left: 20px;">Log
+                        out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="m-4" style="height: 100%;">
+            <div class="col-md-7" style="width: 100%;">
+                <div class="table-responsive">
+                    <div id="contenedor-principal">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

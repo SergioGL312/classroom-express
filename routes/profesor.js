@@ -2,6 +2,26 @@ const express = require('express');
 const profe = express.Router();
 const db = require('../config/db');
 const randomstring = require('randomstring');
+const jwt = require('jsonwebtoken');
+
+profe.post('/login', async (req, res, next) => {
+  const { email, contrasenia } = req.body;
+  let query = `SELECT * FROM usuarios WHERE email = '${email}'`;
+  query += ` AND contraseña = '${contrasenia}';`;
+  const rows = await db.query(query);
+
+  if (email && contrasenia) {
+      if (rows.length === 1) {
+          const token = jwt.sign({
+              id: rows[0].id,
+              email: rows[0].email
+          }, "debubkey");
+          return res.status(200).json({ code: 200, message: `${token}` })
+      } else{ return res.status(200).json({ code: 401, message: "Correo y/o Contraseña Incorrecto" }) }
+  }
+  
+  return res.status(500).json({ code: 500, message: "Incomplete values" });
+});
 
 profe.get('/listaCursos', async (req, res, next) => {
   const query = "Select * FROM clases;";
@@ -32,14 +52,15 @@ profe.get('/curso=:id([0-9]{1,3})', async (req, res, next) => {
   const id = req.params.id;
   const tamanio = await db.query(`SELECT count(*) AS "size" FROM clases;`);
   if (id >= 1 && id <= tamanio[0].size) {
-      const curso = await db.query(`SELECT * FROM clases WHERE id = '${id}';`);
-      return res.status(200).json({code: 200, message: curso});
+    const curso = await db.query(`SELECT * FROM clases WHERE id = '${id}';`);
+    return res.status(200).json({ code: 200, message: curso });
   }
-  return res.status(404).json({code: 404, message: "Curso no encontrado" });
+  return res.status(404).json({ code: 404, message: "Curso no encontrado" });
 });
 
-profe.get('/nombreTareas', async (req, res, next) => {
-  const query = "Select titulo_de_la_tarea FROM tareas;";
+profe.get('/tareas=:id([0-9]{1,3})', async (req, res, next) => {
+  const id = req.params.id;
+  const query = `Select id, titulo_de_la_tarea FROM tareas WHERE id_clase = ${id};`;
   const rows = await db.query(query);
   return res.status(200).json({ code: 200, message: rows });
 });
@@ -63,14 +84,27 @@ profe.post('/crearTarea', async (req, res, next) => {
   return res.status(500).json({ code: 500, message: "Valores incompletos" });
 });
 
-profe.get('/tareasAlum', async (req, res, next) => {
-  const query = "Select u.nombre FROM entrega_de_tareas e, usuarios u WHERE e.id_estudiante = u.id;";
+profe.get('/tareasAlumnosNombres=:id([0-9]{1,3})', async (req, res, next) => {
+  const id = req.params.id;
+  const query = `Select e.id, u.nombre FROM entrega_de_tareas e, usuarios u WHERE e.id_estudiante = u.id && e.id_tarea = ${id};`;
   const rows = await db.query(query);
-  return res.status(200).json({ code: 200, message: rows });
+  if (rows.length > 0) {
+    return res.status(200).json({ code: 200, message: rows });
+  }
+  return res.status(404).json({ code: 404, message: "No hay tareas entregadas." });
+});
+
+profe.get('/archivosId=:id([0-9]{1,3})', async (req, res, next) => {
+  const id = req.params.id;
+  const tamanio = await db.query(`SELECT count(*) AS "size" FROM entrega_de_tareas;`);
+  if (id >= 1 && id <= tamanio[0].size) {
+    const curso = await db.query(`SELECT u.nombre, e.archivos_adjuntos FROM entrega_de_tareas e, usuarios u WHERE u.id = '${id}';`);
+    return res.status(200).json({ code: 200, message: curso });
+  }
+  return res.status(404).json({ code: 404, message: "Archivo encontrado" });
 });
 
 function generarCodigo() {
-
   const codigo = randomstring.generate({
     length: 6,
     charset: 'alphanumeric'
