@@ -40,6 +40,9 @@ CREATE TABLE `entrega_de_tareas` (
     `archivos_adjuntos` longblob
 );
 
+ALTER TABLE entrega_de_tareas
+ADD retroalimentacion varchar(200);
+
 -- ALTER TABLE entrega_de_tareas
 -- ADD id_usuario int(11);
 

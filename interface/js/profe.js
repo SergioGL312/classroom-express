@@ -1,6 +1,6 @@
 window.onload = init;
 var headers = {};
-var url = "http://localhost:5555";
+var url = "http://localhost:5555/p";
 
 function init() {
   if (localStorage.getItem('token-c')) {
@@ -10,7 +10,7 @@ function init() {
       }
     }
     loadClases();
-    document.getElementById("new-class").addEventListener('click', () => window.location.href = 'nuevaClase.html');
+    document.getElementById("nueva-clase").addEventListener('click', () => window.location.href = 'nuevaClase.html');
     document.getElementById("log-out").addEventListener('click', logout);
   } else {
     window.location.href = 'index.html';
@@ -18,7 +18,7 @@ function init() {
 }
 
 function loadClases() {
-  axios.get(url + "/p/listaCursos", headers)
+  axios.get(url + "/listaCursos", headers)
     .then(function(res) {
         displayClases(res.data.message);
     }).catch(function(err) {

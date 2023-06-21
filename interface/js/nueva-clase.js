@@ -1,6 +1,6 @@
 window.onload = init;
 var headers = {};
-var url = "http://localhost:5555/p/";
+var url = "http://localhost:5555/p";
 
 function init() {
     if (localStorage.getItem('token-c')) {
@@ -9,15 +9,15 @@ function init() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token-c')
             }
         }
-        document.getElementById('registrar').addEventListener('click', registrar);
+        document.getElementById('btn-registrar').addEventListener('click', registrar);
     } else {
         window.location.href = "index.html";
     }
 }
 
 function registrar() {
-    var nombre = document.getElementById('input-name').value;
-    var descripcion = document.getElementById('input-description').value;
+    var nombre = document.getElementById('input-nombre').value;
+    var descripcion = document.getElementById('input-descripcion').value;
     if (nombre != "") {
         axios.post(url + "/crearCurso/", {
             "nombre_clase": nombre,

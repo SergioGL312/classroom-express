@@ -3,6 +3,7 @@ const app = express();
 
 // Routes
 const profesor = require('./routes/profesor');
+const alumno = require('./routes/alumno');
 
 // Middleware
 const index = require('./middleware/index');
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', index);
 
 app.use('/p', profesor);
+app.use('/a', alumno);
 
 app.use(notFound);
 

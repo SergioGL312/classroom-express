@@ -1,4 +1,5 @@
 window.onload = init;
+var url = "http://localhost:5555/p";
 
 function init() {
   if (!localStorage.getItem('token-c')) {
@@ -14,7 +15,7 @@ function login() {
   if (validateEmail(email)) {
     if (email && contrasenia) {
       if (contrasenia !== "user") {
-        axios.post("http://localhost:5555/p/login", {
+        axios.post(url + "/login", {
           "email": email,
           "contrasenia": contrasenia
         })

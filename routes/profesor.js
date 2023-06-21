@@ -66,12 +66,12 @@ profe.get('/tareas=:id([0-9]{1,3})', async (req, res, next) => {
 });
 
 profe.post('/crearTarea', async (req, res, next) => {
-  const { titulo, descripcion, valor, fecha_de_vencimiento } = req.body;
+  const { titulo, descripcion, valor, fecha_de_vencimiento, id } = req.body;
   if (titulo && fecha_de_vencimiento && valor) {
     let queryUltimoId = `SELECT MAX(id) as max FROM tareas;`;
     const ultimoId = await db.query(queryUltimoId);
     let query = `INSERT INTO tareas(id, titulo_de_la_tarea, descripcion, fecha_de_vencimento, valor, id_clase) `;
-    query += `VALUES ('${ultimoId[0].max + 1}', '${titulo}', '${descripcion}', '${fecha_de_vencimiento}', '${valor}', '1');`;
+    query += `VALUES ('${ultimoId[0].max + 1}', '${titulo}', '${descripcion}', '${fecha_de_vencimiento}', '${valor}', '${id}');`;
 
     const rows = await db.query(query);
 

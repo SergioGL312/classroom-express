@@ -1,6 +1,6 @@
 window.onload = init;
 var headers = {};
-var url = "http://localhost:5555";
+var url = "http://localhost:5555/p";
 var paramURL = new URLSearchParams(window.location.search);
 var id_tarea = paramURL.get('id');
 
@@ -18,11 +18,20 @@ function init() {
 }
 
 function loadTareas() {
-  axios.get(url + `/p/tareasAlumnosNombres=${id_tarea}`, headers)
+  axios.get(url + `/tareasAlumnosNombres=${id_tarea}`, headers)
     .then(function (res) {
-      console.log(res);
       displayTodasTareas(res.data.message);
     }).catch(function (err) {
+      if (err.response.data.code === 404) {
+        var titulo404 = document.createElement('h1');
+        var mensaje = document.createElement('h4');
+        
+        titulo404.textContent = "404";
+        mensaje.textContent = err.response.data.message;
+        
+        document.getElementById("contenedor-principal").appendChild(titulo404);
+        document.getElementById("contenedor-principal").appendChild(mensaje);
+      }
       console.log(err);
     });
 }
