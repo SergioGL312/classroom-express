@@ -1,5 +1,5 @@
 window.onload = init;
-var url = "http://localhost:5555/p";
+var url = "http://localhost:5555";
 
 function init() {
   if (!localStorage.getItem('token-c')) {
@@ -14,19 +14,21 @@ function login() {
   var contrasenia = document.getElementById('input-password').value;
   if (validateEmail(email)) {
     if (email && contrasenia) {
-      if (contrasenia !== "user") {
-        axios.post(url + "/login", {
-          "email": email,
-          "contrasenia": contrasenia
-        })
-          .then(res => {
-            if (res.data.code === 200) {
-              localStorage.setItem("token-c", res.data.message);
+      axios.post(url + "/login", {
+        "email": email,
+        "contrasenia": contrasenia
+      })
+        .then(res => {
+          if (res.data.code === 200) {
+            localStorage.setItem("token-c", res.data.message.token);
+            if (res.data.message.rol === 'profesor') {
               window.location.href = "profe.html";
-            } else { alert("Error Email y/o Contraseña Incorrecto"); }
-          })
-          .catch(err => console.log(err));
-      } else { alert("No tienes permiso de acceso"); }
+            } else {
+              window.location.href = "alumno.html";
+            }
+          } else { alert("Error Email y/o Contraseña Incorrecto"); }
+        })
+        .catch(err => console.log(err));
     } else { alert("Error faltan campos"); }
   } else { alert('Digita un correo valido'); }
 }
