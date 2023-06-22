@@ -1,5 +1,5 @@
 window.onload = init;
-var url = "http://localhost:5555";
+var urlProfe = "http://localhost:5555";
 
 function init() {
   if (!localStorage.getItem('token-c')) {
@@ -14,18 +14,16 @@ function login() {
   var contrasenia = document.getElementById('input-password').value;
   if (validateEmail(email)) {
     if (email && contrasenia) {
-      axios.post(url + "/login", {
+      axios.post(urlProfe + "/login", {
         "email": email,
         "contrasenia": contrasenia
       })
         .then(res => {
           if (res.data.code === 200) {
             localStorage.setItem("token-c", res.data.message.token);
-            if (res.data.message.rol === 'profesor') {
-              window.location.href = "profe.html";
-            } else {
-              window.location.href = "alumno.html";
-            }
+            localStorage.setItem("rol", res.data.message.rol);
+            localStorage.setItem("id", res.data.message.id);
+            window.location.href = `profe.html?id=${res.data.message.id}`;
           } else { alert("Error Email y/o Contraseña Incorrecto"); }
         })
         .catch(err => console.log(err));

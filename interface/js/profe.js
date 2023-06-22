@@ -1,6 +1,9 @@
 window.onload = init;
 var headers = {};
-var url = "http://localhost:5555/p";
+var urlProfe = "http://localhost:5555/p";
+var urlAlumno = "http://localhost:5555/a";
+var paramURL = new URLSearchParams(window.location.search);
+var id = paramURL.get('id');
 
 function init() {
   if (localStorage.getItem('token-c')) {
@@ -9,21 +12,37 @@ function init() {
         'Authorization': 'Bearer ' + localStorage.getItem('token-c')
       }
     }
-    loadClases();
-    document.getElementById("nueva-clase").addEventListener('click', () => window.location.href = 'nuevaClase.html');
+    if (localStorage.getItem('rol') === "profesor") {
+      loadClases("P");
+      document.getElementById("nueva-clase").addEventListener('click', () => window.location.href = 'nuevaClase.html');
+    } else {
+      loadClases("A");
+      document.getElementById("nueva-clase").addEventListener('click', () => window.location.href = `nuevaClase.html?idA=${id}`);
+    }
+
     document.getElementById("log-out").addEventListener('click', logout);
   } else {
     window.location.href = 'index.html';
   }
 }
 
-function loadClases() {
-  axios.get(url + "/listaCursos", headers)
+function loadClases(rol) {
+  if (rol === "P" && id == localStorage.getItem('id')) {
+    axios.get(urlProfe + "/listaCursos=" + id, headers)
     .then(function(res) {
         displayClases(res.data.message);
     }).catch(function(err) {
         console.log(err);
     });
+  } else if (rol === "A" && id == localStorage.getItem('id')) {
+    axios.get(urlAlumno + "/listaCursos=" + id , headers)
+    .then(function(res) {
+        displayClases(res.data.message);
+    }).catch(function(err) {
+        console.log(err);
+    });
+  }
+  
 }
 
 function displayClases(clases) {
@@ -46,6 +65,6 @@ function displayClases(clases) {
 }
 
 function logout() {
-  localStorage.removeItem('token-c');
+  localStorage.clear();
   window.location.href = 'index.html';
 }

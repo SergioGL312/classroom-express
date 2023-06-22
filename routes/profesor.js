@@ -3,8 +3,9 @@ const profe = express.Router();
 const db = require('../config/db');
 const randomstring = require('randomstring');
 
-profe.get('/listaCursos', async (req, res, next) => {
-  const query = "Select * FROM clases;";
+profe.get('/listaCursos=:id([0-9]{1,3})', async (req, res, next) => {
+  const id = req.params.id;
+  const query = `Select id, nombre_clase FROM clases WHERE id_profesor_a_cargo = ${id};`;
   const rows = await db.query(query);
   return res.status(200).json({ code: 200, message: rows });
 });

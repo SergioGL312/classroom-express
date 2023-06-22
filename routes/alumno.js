@@ -3,47 +3,33 @@ const alumno = express.Router();
 const db = require('../config/db');
 const jwt = require('jsonwebtoken');
 
-alumno.post('/loginA', async (req, res, next) => {
-  const { email, contrasenia } = req.body;
-  let query = `SELECT * FROM usuarios WHERE email = '${email}'`;
-  query += ` AND contraseña = '${contrasenia}';`;
-  const rows = await db.query(query);
-
-  if (email && contrasenia) {
-    if (rows.length === 1) {
-      const token = jwt.sign({
-        id: rows[0].id,
-        email: rows[0].email
-      }, "debubkey");
-      return res.status(200).json({ code: 200, message: `${token}` })
-    } else { return res.status(200).json({ code: 401, message: "Correo y/o Contraseña Incorrecto" }) }
-  }
-
-  return res.status(500).json({ code: 500, message: "Incomplete values" });
-});
-
-alumno.get('/listaCursosA=:id([0-9]{1,3})', async (req, res, next) => {
+alumno.get('/listaCursos=:id([0-9]{1,3})', async (req, res, next) => {
   const id = req.params.id;
-  const query = `Select c.nombre_clase, c.descripcion FROM clases c, inscripciones i WHERE i.id_usuario = ${id} && i.id_clase = c.id;`;
+  const query = `Select c.id, c.nombre_clase, c.descripcion FROM clases c, inscripciones i WHERE i.id_usuario = ${id} && i.id_clase = c.id;`;
   const rows = await db.query(query);
   return res.status(200).json({ code: 200, message: rows });
 });
 
 alumno.post('/inscribirse', async (req, res, next) => {
-  const { id_usuario, id_clase, codigo } = req.body;
-  if (id_usuario && id_clase && codigo) {
-    let queryVerifInsc = `SELECT * FROM inscripciones WHERE id_usuario = '${id_usuario}' AND id_clase = ${id_clase};`;
+  const { id_usuario, codigo } = req.body;
+  if (id_usuario && codigo) {
+    let queryVerifInsc = `SELECT u.id , u.nombre , c.nombre_clase, c.codigo`
+    queryVerifInsc += ` FROM usuarios AS u`
+    queryVerifInsc += ` INNER JOIN inscripciones AS i ON u.id = i.id_usuario`
+    queryVerifInsc += ` INNER JOIN clases AS c ON i.id_clase = c.id`
+    queryVerifInsc += ` WHERE u.id = ${id_usuario}`
+    queryVerifInsc += `   AND c.codigo = '${codigo}';`;
     const inscrito = await db.query(queryVerifInsc);
-    if (inscrito.length < 0) {
-      let queryCodigo = `SELECT codigo FROM clases WHERE id = ${id_clase}`;
-      const codigoClase = await db.query(queryCodigo);
-      if (codigoClase[0].codigo == codigo) {
+    if (inscrito.length < 1) {
+      const queryClase = `SELECT id, codigo FROM clases WHERE codigo = '${codigo}';`;
+      const datosClase = await db.query(queryClase);
+      if (datosClase[0].codigo == codigo) {
         let queryUltimoId = `SELECT MAX(id) as max FROM inscripciones;`;
         const ultimoId = await db.query(queryUltimoId);
         let query = `INSERT INTO inscripciones(id, id_usuario, id_clase) `;
-        query += `VALUES ('${ultimoId[0].max + 1}', '${id_usuario}', '${id_clase}');`;
+        query += `VALUES ('${ultimoId[0].max + 1}', '${id_usuario}', '${datosClase[0].id}');`;
         const rows = await db.query(query);
-
+        
         if (rows.affectedRows == 1) {
           return res.status(201).json({ code: 201, message: "Alumno inscrito correctamente" });
         }
@@ -70,7 +56,11 @@ alumno.get('/infoMateria', async function (req, res, next) {
   query += ` WHERE c.id = ${idClase}`;
   query += ` AND i.id_usuario = ${idUsuario}`;
   const rows = await db.query(query);
-  return res.status(200).json({ code: 200, message: rows });
+  if (rows.length > 0) {
+    return res.status(200).json({ code: 200, message: rows });
+  } else {
+    return res.status(404).json({ code: 404, message: "Curso no encontrado" });
+  }
 });
 
 alumno.get('/tareas', async (req, res, next) => {

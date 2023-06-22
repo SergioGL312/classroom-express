@@ -39,7 +39,7 @@ function displayTareas(tareas) {
     divTareas.textContent = t.titulo_de_la_tarea;
     divTareas.style.cursor = "pointer";
     divTareas.onclick = function () {
-      window.location.href = `tarea.html?id=${t.id}`;
+      window.location.href = `tareasEntregadas.html?id=${t.id}`;
     };
 
     contenedor.appendChild(divTareas);

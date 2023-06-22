@@ -15,7 +15,7 @@ login.post('/', async (req, res, next) => {
         id: rows[0].id,
         email: rows[0].email
       }, "debubkey");
-      return res.status(200).json({ code: 200, message: { "token": `${token}`, "rol": `${rows[0].rol}` } })
+      return res.status(200).json({ code: 200, message: { "token": `${token}`, "rol": `${rows[0].rol}`, "id": `${rows[0].id}` } })
     } else { return res.status(200).json({ code: 401, message: "Correo y/o Contraseña Incorrecto" }) }
   }
 
