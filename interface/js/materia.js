@@ -16,12 +16,14 @@ function init() {
     if (localStorage.getItem('rol') === 'profesor') {
       loadTareas('P');
       loadInfoMateria('P');
+      document.getElementById('enlace-trabajo').href = `trabajoClase.html?id=${id_clase}`;
     } else if (localStorage.getItem('rol') === 'alumno') {
       loadTareas('A');
       loadInfoMateria('A');
+      document.getElementById('enlace-trabajo').style.display = 'none';
     }
     document.getElementById('enlace-tablon').href = `materia.html?id=${id_clase}`;
-    // document.getElementById('enlace-trabajo').href = `trabajoClase.html?id=${id_clase}`;
+    document.getElementById('coderater').href = `profe.html?id=${localStorage.getItem('id')}`;
   } else {
     window.location.href = 'index.html';
   }
@@ -54,9 +56,12 @@ function displayTareas(tareas) {
     divTareas.textContent = t.titulo_de_la_tarea;
     divTareas.style.cursor = "pointer";
     divTareas.onclick = function () {
-      window.location.href = `tareasEntregadas.html?id=${t.id}`;
+      if (localStorage.getItem("rol") === "profesor") {
+        window.location.href = `tareasEntregadas.html?id=${t.id}`;
+      } else if(localStorage.getItem("rol") === "alumno") {
+        window.location.href = `entregarTarea.html?idT=${t.id}&idC=${id_clase}`;
+      }
     };
-
     contenedor.appendChild(divTareas);
   }
 }
@@ -80,7 +85,6 @@ function loadInfoMateria(rol) {
         }
       });
   }
-
 }
 
 function displayInfoMateria(info) {
@@ -93,7 +97,6 @@ function displayInfoMateria(info) {
   } else if (localStorage.getItem('rol') === 'alumno') {
     divCodigo.style.display = 'none';
   }
-
 }
 
 function plantilla404(err) {

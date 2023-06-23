@@ -12,6 +12,7 @@ function init() {
       }
     }
   loadTareas();
+  document.getElementById('coderater').href = `profe.html?id=${localStorage.getItem('id')}`
   } else {
     window.location.href = 'index.html';
   }
@@ -45,7 +46,7 @@ function displayTodasTareas(alumnosTareaEntregada) {
     divNombreAlumno.textContent = a.nombre;
     divNombreAlumno.style.cursor = "pointer";
     divNombreAlumno.onclick = function () {
-      window.location.href = `archivos.html?id=${a.id}`;
+      window.location.href = `archivos.html?idTE=${a.id}&idEs=${a.id_estudiante}&idT=${a.id_tarea}`;
     };
 
     contenedor.appendChild(divNombreAlumno);

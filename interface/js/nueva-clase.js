@@ -37,7 +37,7 @@ function registrar() {
       .then(res => {
         if (res.data.code === 201) {
           alert(`${res.data.message}`);
-          window.location.href = "profe.html";
+          window.location.href = `profe.html?id=${localStorage.getItem('id')}`;
         } else { alert(`${res.data.message}`); }
       })
       .catch(err => { console.log(err); });

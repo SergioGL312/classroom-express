@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,12 +18,14 @@
     <script src="./js/entregarTarea.js"></script>
     <title>Entregar Tarea</title>
 </head>
+
 <body>
     <header class="p-3 text-bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="profe.html" class="nav-link px-2 text-secondary" style="font-size: 30px;">Coderater</a></li>
+                    <li><a href="profe.html" class="nav-link px-2 text-secondary" style="font-size: 30px;" id="coderater">Coderater</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -37,13 +40,29 @@
                     </div>
                 </div>
                 <div style="width: 200px;" id="div-codigo-clase">
-                    <h4 id="descipcion">??</h4>
-                </div>
-                <div id="contenedor-tareas">
-
+                    <h4 id="descripcion">??</h4>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="p-5 m-0 border-0">
+        <div class="row g-3">
+            <div class="col-md-3" id="div-nombre">
+                <label for="" class="form-label">Enlace de GitHub</label>
+                <input type="text" class="form-control"  id="githubLink" name="githubLink" placeholder="https://github.com/usuario/repo"
+                    required>
+            </div>
+            <div class="col-12 p-4" style="text-align: center;">
+                <button type="submit" class="btn btn-primary" id="btn-subir"
+                    style="width: 150px; height: 40px;">Subir</button>
+            </div>
+            <div class="col-12" id="div-descripcion">
+                <label for="" class="form-label">Retroalimentacion</label>
+                <textarea class="form-control" id="input-retroalimentacion" rows="2" style="resize: none;"></textarea>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

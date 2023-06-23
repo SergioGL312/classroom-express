@@ -29,7 +29,7 @@ alumno.post('/inscribirse', async (req, res, next) => {
         let query = `INSERT INTO inscripciones(id, id_usuario, id_clase) `;
         query += `VALUES ('${ultimoId[0].max + 1}', '${id_usuario}', '${datosClase[0].id}');`;
         const rows = await db.query(query);
-        
+
         if (rows.affectedRows == 1) {
           return res.status(201).json({ code: 201, message: "Alumno inscrito correctamente" });
         }
@@ -71,7 +71,7 @@ alumno.get('/tareas', async (req, res, next) => {
     return res.status(400).json({ code: 404, message: "Los parámetros deben ser números" })
   }
 
-  let query = `SELECT t.titulo_de_la_tarea FROM tareas AS t`;
+  let query = `SELECT t.id, t.titulo_de_la_tarea FROM tareas AS t`;
   query += ` INNER JOIN inscripciones AS i ON t.id_clase = i.id_clase`;
   query += ` WHERE t.id_clase = ${idClase}`;
   query += ` AND i.id_usuario = ${idUsuario};`;
@@ -91,7 +91,7 @@ alumno.get('/infoTarea', async (req, res, next) => {
   let query = `SELECT t.titulo_de_la_tarea, t.descripcion FROM tareas AS t`;
   query += ` INNER JOIN inscripciones AS i ON t.id_clase = i.id_clase`;
   query += ` WHERE t.id_clase = ${idClase}`;
-  query += ` AND i.id_usuario = ${idUsuario};`;
+  query += ` AND i.id_usuario = ${idUsuario}`;
   query += ` AND t.id = ${idTarea};`;
   const rows = await db.query(query);
   return res.status(200).json({ code: 200, message: rows });
@@ -100,20 +100,38 @@ alumno.get('/infoTarea', async (req, res, next) => {
 alumno.post('/subirTarea', async (req, res, next) => {
   const { id_tarea, fecha, url_repo, id_estudiante } = req.body;
   if (id_tarea && fecha) {
-    let queryUltimoId = `SELECT MAX(id) as max FROM entrega_de_tareas;`;
-    const ultimoId = await db.query(queryUltimoId);
-    let query = `INSERT INTO entrega_de_tareas(id, id_tarea, fecha, url_repo, id_estudiante) `;
-    query += `VALUES ('${ultimoId[0].max + 1}', '${id_tarea}', '${fecha}', '${url_repo}', '${id_estudiante}');`;
+    let queryTareaExiste = `SELECT * FROM entrega_de_tareas WHERE id_tarea = ${id_tarea} AND id_estudiante = ${id_estudiante};`;
+    const resultTareaExi = await db.query(queryTareaExiste);
+    if (resultTareaExi.length > 0) {
+      let queryUpdareTarea = `UPDATE entrega_de_tareas SET fecha = '${fecha}', url_repo = '${url_repo}' WHERE id_tarea = ${id_tarea} AND id_estudiante = ${id_estudiante};`;
+      const resUpdate = await db.query(queryUpdareTarea);
+      if (resUpdate.affectedRows == 1) {
+        return res.status(201).json({ code: 201, message: "Actualizado correctamente" });
+      }
+      return res.status(500).json({ code: 500, message: "Ocurrio un error" });
+    } else {
+      let queryUltimoId = `SELECT MAX(id) as max FROM entrega_de_tareas;`;
+      const ultimoId = await db.query(queryUltimoId);
+      let query = `INSERT INTO entrega_de_tareas(id, id_tarea, fecha, url_repo, id_estudiante) `;
+      query += `VALUES ('${ultimoId[0].max + 1}', '${id_tarea}', '${fecha}', '${url_repo}', '${id_estudiante}');`;
 
-    const rows = await db.query(query);
+      const rows = await db.query(query);
 
-    if (rows.affectedRows == 1) {
-      return res.status(201).json({ code: 201, message: "Tarea agregada correctamente" });
+      if (rows.affectedRows == 1) {
+        return res.status(201).json({ code: 201, message: "Tarea agregada correctamente" });
+      }
     }
-
     return res.status(500).json({ code: 500, message: "Ocurrio un error" });
   }
   return res.status(500).json({ code: 500, message: "Valores incompletos" });
+});
+
+alumno.get('/urlExistente', async (req, res, next) => {
+  const idTarea = req.query.idTarea;
+  const idEstudiante = req.query.idEstudiante;
+  let queryURLExiste = `SELECT url_repo FROM entrega_de_tareas WHERE id_tarea = ${idTarea} AND id_estudiante = ${idEstudiante};`;
+  const resultURLExi = await db.query(queryURLExiste);
+  return res.status(200).json({ code: 200, message: resultURLExi });
 });
 
 alumno.get('/retroalimentacion', async (req, res, next) => {

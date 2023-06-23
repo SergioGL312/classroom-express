@@ -19,7 +19,7 @@ function init() {
       loadClases("A");
       document.getElementById("nueva-clase").addEventListener('click', () => window.location.href = `nuevaClase.html?idA=${id}`);
     }
-
+    document.getElementById('coderater').href = `profe.html?id=${localStorage.getItem('id')}`;
     document.getElementById("log-out").addEventListener('click', logout);
   } else {
     window.location.href = 'index.html';

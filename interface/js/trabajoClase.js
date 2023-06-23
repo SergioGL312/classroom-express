@@ -13,6 +13,7 @@ function init() {
       }
     }
     loadTareas();
+    document.getElementById('coderater').href = `profe.html?id=${localStorage.getItem('id')}`
     document.getElementById('enlace-tablon').href = `materia.html?id=${id_clase}`;
     document.getElementById('enlace-trabajo').href = `trabajoClase.html?id=${id_clase}`;
     document.getElementById('btn-crear-clase').addEventListener('click', () => window.location.href = `crearTarea.html?id=${id_clase}`);
