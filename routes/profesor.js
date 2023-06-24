@@ -11,12 +11,12 @@ profe.get('/listaCursos=:id([0-9]{1,3})', async (req, res, next) => {
 });
 
 profe.post('/crearCurso', async (req, res, next) => {
-  const { nombre_clase, descripcion } = req.body;
-  if (nombre_clase && descripcion) {
+  const { nombre_clase, descripcion, id_profesor_a_cargo } = req.body;
+  if (nombre_clase && descripcion && id_profesor_a_cargo) {
     let queryUltimoId = `SELECT MAX(id) as max FROM clases;`;
     const ultimoId = await db.query(queryUltimoId);
     let query = `INSERT INTO clases (id, nombre_clase, descripcion, codigo, id_profesor_a_cargo) `;
-    query += `VALUES ('${ultimoId[0].max + 1}', '${nombre_clase}', '${descripcion}', '${generarCodigo()}', '1');`;
+    query += `VALUES ('${ultimoId[0].max + 1}', '${nombre_clase}', '${descripcion}', '${generarCodigo()}', '${id_profesor_a_cargo}');`;
 
     const rows = await db.query(query);
 

@@ -32,7 +32,8 @@ function registrar() {
   if (nombre != "") {
     axios.post(urlProfe + "/crearCurso/", {
       "nombre_clase": nombre,
-      "descripcion": descripcion
+      "descripcion": descripcion,
+      "id_profesor_a_cargo": localStorage.getItem("id")
     })
       .then(res => {
         if (res.data.code === 201) {
