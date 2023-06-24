@@ -1,0 +1,64 @@
+#archivo-actual:hover {
+    color: rgb(10 88 202);
+}
+
+.contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.main a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    margin-left: 100px;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+}
+
+.retroalimentacion {
+    margin-top: 20px;
+}
+
+.retroalimentacion h5 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.retroalimentacion input[type="text"],
+.retroalimentacion textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+#generar-uml {
+    padding: 8px 12px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#generar-uml:hover {
+    background-color: #45a049;
+}
+
+#btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

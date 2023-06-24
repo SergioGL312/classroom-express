@@ -1,0 +1,29 @@
+button {
+    color: #fff;
+    background-color: rgb(25 103 210);
+    border-radius: 99px;
+    height: 45px;
+    width: 110px;
+    border: none;
+}
+
+button:hover {
+    background-color: rgb(26 91 182);
+}
+
+#contenedor-tareas {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.tarea {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 0.0625rem solid #dadce0;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.tarea:hover {
+    background-color: #E8F0FE;
+}

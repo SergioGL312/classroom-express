@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,38 +16,52 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/5ba0cb994d.js" crossorigin="anonymous"></script>
     <script src="js/archivos.js"></script>
+    <link rel="stylesheet" href="css/archivos.css">
     <title>Archivos</title>
 </head>
+
 <body>
     <header class="p-3 text-bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="profe.html" class="nav-link px-2 text-secondary" style="font-size: 30px;" id="coderater">Coderater</a></li>
+                    <li><a href="profe.html" class="nav-link px-2 text-secondary" style="font-size: 30px;"
+                            id="coderater">Coderater</a></li>
                 </ul>
             </div>
         </div>
     </header>
 
-    <div class="contenido">
-        <div class="main">
-            <a href="" id="archivo-actual" target="_blank"></a>
-        </div>
-        <div class="side">
-            <div>
-                <button id="generar-uml">Generar UML</button>
-            </div>
-            <div class="retroalimentacion">
-                <h5>Calificación:</h5>
-                <input type="text" id="calificacion">
-                <p>Comentario privado:</p>
-                <textarea name="" id="comentario-privado" cols="30" rows="5" style="resize: none;" placeholder="Añade un comentario . . ."></textarea>
+
+    <div class="m-4" style="height: 100%;">
+        <div class="col-md-7" style="width: 100%;">
+            <div class="table-responsive">
+                <div class="contenido">
+                    <div class="main">
+                        <a href="" id="archivo-actual" target="_blank"></a>
+                    </div>
+                    <div class="side">
+                        <div>
+                            <button id="generar-uml">Generar UML</button>
+                        </div>
+                        <div class="retroalimentacion">
+                            <h5>Calificación:</h5>
+                            <input type="text" id="calificacion">
+                            <p>Comentario privado:</p>
+                            <textarea name="" id="comentario-privado" cols="30" rows="5" style="resize: none;"
+                                placeholder="Añade un comentario . . ."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 p-4" id="btn-container">
+                    <button type="submit" class="btn btn-primary" id="btn-calif"
+                        style="width: 150px; height: 40px;">Calificar</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-12 p-4">
-        <button type="submit" class="btn btn-primary" id="btn-calif" style="width: 150px; height: 40px;">Calificar</button>
-    </div>
 </body>
+
 </html>

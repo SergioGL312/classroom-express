@@ -1,0 +1,24 @@
+#contenedor-principal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.nombre {
+    height: 150px;
+    width: 150px;
+    margin-right: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+    padding-top: 60px;
+}
+
+.nombre:hover {
+    color: rgb(25 103 210);
+}

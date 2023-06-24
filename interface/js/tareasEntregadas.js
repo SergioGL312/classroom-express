@@ -43,6 +43,7 @@ function displayTodasTareas(alumnosTareaEntregada) {
   for (let a of alumnosTareaEntregada) {
     let divNombreAlumno = document.createElement("div");
 
+    divNombreAlumno.classList.add("nombre");
     divNombreAlumno.textContent = a.nombre;
     divNombreAlumno.style.cursor = "pointer";
     divNombreAlumno.onclick = function () {

@@ -37,6 +37,7 @@ function displayTareas(tareas) {
   for (let t of tareas) {
     let divTareas = document.createElement("div");
 
+    divTareas.classList.add("tarea");
     divTareas.textContent = t.titulo_de_la_tarea;
     divTareas.style.cursor = "pointer";
     divTareas.onclick = function () {

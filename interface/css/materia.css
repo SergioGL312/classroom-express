@@ -1,0 +1,52 @@
+p {
+    font-weight: bold;
+}
+
+#contenedor-titulo {
+    height: 200px;
+    width: auto;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+#titulo {
+    margin: 30px;
+}
+
+.flex {
+    display: flex;
+    margin-top: 24px;
+}
+
+#div-codigo-clase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 0.0625rem solid #dadce0;
+    border-radius: 0.5rem;
+    height: 150px;
+    width: 300px;
+    overflow-y: auto;
+}
+
+#contenedor-tareas {
+    width: 100%;
+    margin-left: 30px;
+}
+
+.tarea {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 0.0625rem solid #dadce0;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.tarea:hover {
+    background-color: #E8F0FE;
+}

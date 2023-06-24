@@ -16,6 +16,7 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/5ba0cb994d.js" crossorigin="anonymous"></script>
     <script src="./js/entregarTarea.js"></script>
+    <link rel="stylesheet" href="css/entregarTarea.css">
     <title>Entregar Tarea</title>
 </head>
 
@@ -35,34 +36,36 @@
         <div class="m-4" style="height: 100%;">
             <div class="col-md-7" style="width: 100%;">
                 <div class="table-responsive">
-                    <div id="contenedor-titulo" style="height: 200px; width: auto;">
+                    <div id="contenedor-titulo">
                         <h1 id="titulo">??</h1>
                     </div>
                 </div>
-                <div style="width: 200px;" id="div-codigo-clase">
+                <div id="div-descripcion">
                     <h4 id="descripcion">??</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-5 m-0 border-0">
+            <div class="row g-3">
+                <div class="col-md-6" id="div-nombre">
+                    <label for="" class="form-label">Enlace de GitHub</label>
+                    <input type="text" class="form-control"  id="githubLink" name="githubLink" placeholder="https://github.com/usuario/repo"
+                        required>
+                </div>
+                <div class="col-12 p-4" style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" id="btn-subir"
+                        style="width: 150px; height: 40px;">Subir</button>
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">Retroalimentacion</label>
+                    <textarea class="form-control" id="input-retroalimentacion" rows="2" style="resize: none;"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="p-5 m-0 border-0">
-        <div class="row g-3">
-            <div class="col-md-3" id="div-nombre">
-                <label for="" class="form-label">Enlace de GitHub</label>
-                <input type="text" class="form-control"  id="githubLink" name="githubLink" placeholder="https://github.com/usuario/repo"
-                    required>
-            </div>
-            <div class="col-12 p-4" style="text-align: center;">
-                <button type="submit" class="btn btn-primary" id="btn-subir"
-                    style="width: 150px; height: 40px;">Subir</button>
-            </div>
-            <div class="col-12" id="div-descripcion">
-                <label for="" class="form-label">Retroalimentacion</label>
-                <textarea class="form-control" id="input-retroalimentacion" rows="2" style="resize: none;"></textarea>
-            </div>
-        </div>
-    </div>
+    
 </body>
 
 </html>
