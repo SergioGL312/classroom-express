@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="./js/admin.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="contenedor-principal">
+    <h1>Formulario</h1>
+
+    <div class="contenedor-secundario">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Alfonso" required><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="a@gmail.com" required><br>
+
+      <label for="contraseña">Contraseña:</label>
+      <input type="password" id="contraseña" placeholder="********" name="contraseña" required><br>
+
+      <label for="rol">Rol:</label>
+      <select id="rol" name="rol" required>
+        <option value="">Selecciona un rol</option>
+        <option value="profesor">Profesor</option>
+        <option value="alumno">Alumno</option>
+      </select><br>
+
+      <button id="btn-enviar" type="submit">Enviar</button>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

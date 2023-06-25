@@ -3,6 +3,7 @@ const app = express();
 
 // Routes
 const login = require('./routes/login')
+const admin = require('./routes/admin');
 const profesor = require('./routes/profesor');
 const alumno = require('./routes/alumno');
 
@@ -17,7 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', index);
 
-app.use('/login', login)
+app.use('/login', login);
+app.use('/admin', admin);
 app.use('/p', profesor);
 app.use('/a', alumno);
 

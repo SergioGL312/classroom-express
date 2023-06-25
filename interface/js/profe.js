@@ -22,7 +22,7 @@ function init() {
     document.getElementById('coderater').href = `profe.html?id=${localStorage.getItem('id')}`;
     document.getElementById("log-out").addEventListener('click', logout);
   } else {
-    window.location.href = 'index.html';
+    window.location.href = `index.html?id=${localStorage.getItem('id')}`;
   }
 }
 

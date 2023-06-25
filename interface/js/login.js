@@ -23,7 +23,11 @@ function login() {
             localStorage.setItem("token-c", res.data.message.token);
             localStorage.setItem("rol", res.data.message.rol);
             localStorage.setItem("id", res.data.message.id);
-            window.location.href = `profe.html?id=${res.data.message.id}`;
+            if (res.data.message.rol == "admin") {
+              window.location.href = "admin.html";
+            } else {
+              window.location.href = `profe.html?id=${res.data.message.id}`;
+            }
           } else { alert("Error Email y/o Contraseña Incorrecto"); }
         })
         .catch(err => console.log(err));
