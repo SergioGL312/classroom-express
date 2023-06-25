@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2023 a las 04:29:51
+-- Tiempo de generación: 25-06-2023 a las 04:20:50
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -67,7 +67,8 @@ INSERT INTO `clases` (`id`, `nombre_clase`, `descripcion`, `codigo`, `id_profeso
 (4, 'in', 'gds', 'WOSdvz', 1),
 (5, 'rwe', 'rwe', 'UYTolA', 1),
 (6, 'pruebadeprueba', 'pruebaprueba', 'zNrbLV', 1),
-(7, 'pruebapruebaprueba', 'pruebapruebaprueba', 't00uhq', 1);
+(7, 'pruebapruebaprueba', 'pruebapruebaprueba', 't00uhq', 1),
+(8, 'interfaz', 'in', 'rFYAbu', 1);
 
 -- --------------------------------------------------------
 
@@ -91,7 +92,7 @@ CREATE TABLE `entrega_de_tareas` (
 INSERT INTO `entrega_de_tareas` (`id`, `id_tarea`, `fecha`, `url_repo`, `id_estudiante`, `retroalimentacion`) VALUES
 (4, 3, '2023-06-23 02:10:12', 'https://github.com/SergioGL312/Quiz-Server-Java-Interfaces', 3, 'postman'),
 (5, 1, '2023-06-23 02:10:29', 'https://github.com/SergioGL312/Quiz-Server-JAva', 2, ''),
-(6, 1, '2023-06-23 02:11:18', 'https://github.com/SergioGL312/Quiz-Server-Java-Interfaces', 3, ''),
+(6, 1, '2023-06-24 23:53:54', 'https://github.com/SergioGL312/Quiz-Server-Java-Interfaces', 3, 'grfdfg'),
 (7, 2, '2023-06-23 02:11:22', 'https://github.com/SergioGL312/Quiz-Server-Java-Interfaces', 2, NULL);
 
 -- --------------------------------------------------------
@@ -167,7 +168,9 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `rol`) VALUES
 (1, 'Sergio', 's@gmail.com', '1234', 'profesor'),
 (2, 'Iker', 'i@gmail.com', '1234', 'alumno'),
-(3, 'Orla', 'o@gmail.com', '1234', 'alumno');
+(3, 'Orla', 'o@gmail.com', '1234', 'alumno'),
+(4, 'admin', 'admin@gmail.com', 'admin', 'admin'),
+(5, 'Pablo', 'p@gmail.com', '1234', 'profesor');
 
 --
 -- Índices para tablas volcadas

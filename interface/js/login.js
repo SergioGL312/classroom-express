@@ -5,7 +5,12 @@ function init() {
   if (!localStorage.getItem('token-c')) {
     document.querySelector('.btn-primary').addEventListener('click', login);
   } else {
-    window.location.href = "profe.html";
+    if (localStorage.getItem('rol') === "admin" ) {
+      localStorage.clear();
+      window.location.href = 'index.html';
+    } else {
+      window.location.href = `profe.html${localStorage.getItem("id")}`;
+    }
   }
 }
 
