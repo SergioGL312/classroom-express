@@ -142,4 +142,16 @@ alumno.get('/retroalimentacion', async (req, res, next) => {
   return res.status(200).json({ code: 200, message: rows });
 });
 
+alumno.get('/califExistente', async (req, res, next) => {
+  const idTarea = req.query.idTarea;
+  const idEstudiante = req.query.idEstudiante;
+  let query = `SELECT c.calificacion, t.valor FROM calificaciones c, tareas t WHERE c.id_tarea = ${idTarea} AND c.id_estudiante = ${idEstudiante} AND t.id = ${idTarea};`;
+  const rows = await db.query(query);
+  if (rows.length === 1) {
+    return res.status(200).json({ code: 200, message: rows });
+  } else {
+    return res.status(200).json({ code: 200, message: "-" });
+  }
+});
+
 module.exports = alumno;

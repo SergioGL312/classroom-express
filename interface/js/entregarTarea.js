@@ -12,6 +12,7 @@ function init() {
         'Authorization': 'Bearer ' + localStorage.getItem('token-c')
       }
     }
+    loadCalificacion();
     loadInfoMateria();
     loadURL();
     loadRetroalimentacion();
@@ -85,6 +86,20 @@ function loadRetroalimentacion() {
         comentario.textContent = res.data.message[0].retroalimentacion;
       } else {
         comentario.textContent = '';
+      }
+    }).catch(function (err) {
+      console.log(err);
+    });
+}
+
+function loadCalificacion() {
+  axios.get(url + `/califExistente?idTarea=${id_tarea}&idEstudiante=${localStorage.getItem("id")}`, headers)
+    .then(function (res) {
+      var elementoCalif = document.getElementById('calificacion');
+      if (res.data.message == "-") {
+        elementoCalif.textContent = res.data.message;
+      } else {
+        elementoCalif.textContent = res.data.message[0].calificacion + "/" + res.data.message[0].valor;
       }
     }).catch(function (err) {
       console.log(err);
